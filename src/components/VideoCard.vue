@@ -1,23 +1,40 @@
 <template>
-  <div class="p-6 bg-white rounded-lg shadow-md">
-    <div class="relative w-full h-64 mb-6">
-      <img :src="video.miniature" alt="Video Thumbnail" class="w-full h-full object-cover rounded-lg" />
-      <div class="absolute top-0 left-0 text-white p-2 bg-black bg-opacity-50 rounded-tl-lg">Lecteur</div>
+  <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <div class="relative w-full pb-[56.25%]">
+      <img
+          :src="getImageUrl(video.miniature)"
+          alt="Miniature de la vidéo"
+          class="absolute inset-0 w-full h-full object-cover"
+          @error="handleImageError"
+      />
     </div>
 
-    <h2 class="text-2xl font-bold text-gray-900">{{ video.title }}</h2>
-
-    <p class="text-sm text-gray-500 mt-2">Publié il y a 3 jours - 123 vues</p>
-
-    <p class="mt-4 text-gray-700">{{ video.description }}</p>
+    <div class="p-3 md:p-4">
+      <h2 class="text-base md:text-lg font-bold text-gray-900 line-clamp-2">{{ video.titre }}</h2>
+      <p class="text-xs md:text-sm text-gray-500 mt-1">Publié il y a 3 jours - 423 983 vues</p>
+    </div>
   </div>
 </template>
 
 <script setup>
-defineProps({
+import { ref } from 'vue';
+
+const props = defineProps({
   video: {
     type: Object,
     required: true,
+    miniature: String,
+    titre: String,
   },
 });
+
+const getImageUrl = (imageName) => {
+  const url = `http://localhost:3000/images/${imageName}`;
+  console.log('URL de l\'image :', url);
+  return url;
+};
+
+const handleImageError = (event) => {
+  event.target.src = '/assets/fallback.jpg';
+};
 </script>

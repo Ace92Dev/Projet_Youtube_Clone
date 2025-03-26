@@ -1,10 +1,10 @@
 <template>
-  <aside 
+  <aside
     :class="isOpen ? 'translate-x-0' : '-translate-x-full'"
     class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white p-4 transition-transform duration-300 shadow-lg z-40"
   >
-    <button 
-      @click="$emit('close-sidebar')" 
+    <button
+      @click="$emit('close-sidebar')"
       class="absolute top-4 right-4 text-xl hover:text-gray-300 transition-colors"
     >
       ×
